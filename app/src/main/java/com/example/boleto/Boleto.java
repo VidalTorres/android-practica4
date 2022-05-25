@@ -7,10 +7,8 @@ public class Boleto {
     private String destino;
     private int tipoBoleto;
     private String fecha;
-    private double precio;
-
     private double descuento;
-    private double total;
+    private double precio;
 
     //Constructores
     public Boleto(){
@@ -144,6 +142,7 @@ public class Boleto {
     }
 
     public double obtenerTotal(){
+        double total;
         total = obtenerSubtotal() + obtenerImpuesto() - descuento;
         return total;
     }

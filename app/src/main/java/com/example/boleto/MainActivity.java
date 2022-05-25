@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Dato faltante: Fecha", Toast.LENGTH_SHORT).show();
                 }
                 else if(txtPrecio.getText().toString().matches("")){
-                    Toast.makeText(MainActivity.this,"Dato faltante: Precio",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Dato faltante: Precio del boleto",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String numeroBoleto = txtNumeroBoleto.getText().toString();
