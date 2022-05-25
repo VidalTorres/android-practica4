@@ -1,7 +1,9 @@
 package com.example.boleto;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnCalular;
     private Button btnLimpiar;
+    private Button btnCerrar;
 
     private TextView lblNumeroBoleto2;
     private TextView lblNombreCliente2;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnCalular = (Button) findViewById(R.id.btnCalcular);
         btnLimpiar = (Button) findViewById(R.id.btnLimpiar);
+        btnCerrar = (Button) findViewById(R.id.btnCerrar);
 
         final String [] destinos = {""};
         final int [] tipoBoleto = {0};
@@ -78,44 +83,61 @@ public class MainActivity extends AppCompatActivity {
                 double impuesto;
                 double total;
 
-                String numeroBoleto = txtNumeroBoleto.getText().toString();
-                boleto.setNumeroBoleto(Integer.parseInt(numeroBoleto));
+                if(txtNumeroBoleto.getText().toString().matches("")){
+                    Toast.makeText(MainActivity.this,"Dato faltante: Numero de Boleto",Toast.LENGTH_SHORT).show();
+                }
+                else if(txtNombreCliente.getText().toString().matches("")){
+                    Toast.makeText(MainActivity.this,"Dato faltante: Nombre del cliente",Toast.LENGTH_SHORT).show();
+                }
+                else if(txtEdad.getText().toString().matches("")){
+                    Toast.makeText(MainActivity.this,"Dato faltante: Edad",Toast.LENGTH_SHORT).show();
+                }
+                else if(txtFecha.getText().toString().matches("")) {
+                    Toast.makeText(MainActivity.this, "Dato faltante: Fecha", Toast.LENGTH_SHORT).show();
+                }
+                else if(txtPrecio.getText().toString().matches("")){
+                    Toast.makeText(MainActivity.this,"Dato faltante: Precio",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String numeroBoleto = txtNumeroBoleto.getText().toString();
+                    boleto.setNumeroBoleto(Integer.parseInt(numeroBoleto));
 
-                String nombreCliente = txtNombreCliente.getText().toString();
-                boleto.setNombreCliente(nombreCliente);
+                    String nombreCliente = txtNombreCliente.getText().toString();
+                    boleto.setNombreCliente(nombreCliente);
 
-                String edad = txtEdad.getText().toString();
+                    String edad = txtEdad.getText().toString();
 
-                String fecha = txtFecha.getText().toString();
-                boleto.setFecha(fecha);
+                    String fecha = txtFecha.getText().toString();
+                    boleto.setFecha(fecha);
 
-                boleto.setDestino(destinos[0]);
+                    boleto.setDestino(destinos[0]);
 
-                boleto.setTipoBoleto(tipoBoleto[0]);
+                    boleto.setTipoBoleto(tipoBoleto[0]);
 
-                String precio = txtPrecio.getText().toString();
-                boleto.setPrecio(Double.parseDouble(precio));
+                    String precio = txtPrecio.getText().toString();
+                    boleto.setPrecio(Double.parseDouble(precio));
 
-                subTotal = boleto.obtenerSubtotal(); //crear textView
+                    subTotal = boleto.obtenerSubtotal();
 
-                descuento = boleto.obtenerDescuento(Integer.parseInt(edad));
+                    descuento = boleto.obtenerDescuento(Integer.parseInt(edad));
 
-                impuesto = boleto.obtenerImpuesto();
+                    impuesto = boleto.obtenerImpuesto();
 
-                total = boleto.obtenerTotal();
+                    total = boleto.obtenerTotal();
 
-                //Mostrar datos
-                lblNumeroBoleto2.setText("# " + boleto.getNumeroBoleto());
-                lblNombreCliente2.setText("Nombre: " + boleto.getNombreCliente());
-                lblEdad2.setText("Edad " + edad);
-                lblFecha2.setText("Fecha: "+ boleto.getFecha());
-                lblDestinos2.setText("Destino: " + boleto.getDestino());
-                lblTipoBoleto2.setText("Tipo Boleto: "+ boleto.getTipoBoleto());
-                lblPrecio2.setText("Precio: " + boleto.getPrecio());
-                lblSubTotal.setText("Subtotal: "+subTotal);
-                lblImpuesto.setText("Impuesto: " + impuesto);
-                lblDescuento.setText("Descuento: " + descuento);
-                lblTotal.setText("Total: " + total);
+                    //Mostrar datos
+                    lblNumeroBoleto2.setText("# " + boleto.getNumeroBoleto());
+                    lblNombreCliente2.setText("Nombre: " + boleto.getNombreCliente());
+                    lblEdad2.setText("Edad " + edad);
+                    lblFecha2.setText("Fecha: "+ boleto.getFecha());
+                    lblDestinos2.setText("Destino: " + boleto.getDestino());
+                    lblTipoBoleto2.setText("Tipo Boleto: "+ boleto.getTipoBoleto());
+                    lblPrecio2.setText("Precio: " + boleto.getPrecio());
+                    lblSubTotal.setText("Subtotal: "+subTotal);
+                    lblImpuesto.setText("Impuesto: " + impuesto);
+                    lblDescuento.setText("Descuento: " + descuento);
+                    lblTotal.setText("Total: " + total);
+                }
             }
         });
 
@@ -172,6 +194,27 @@ public class MainActivity extends AppCompatActivity {
                 lblImpuesto.setText("");
                 lblDescuento.setText("");
                 lblTotal.setText("");
+            }
+        });
+
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder confirmar = new AlertDialog.Builder(MainActivity.this);
+                confirmar.setTitle("¿Cerrar APP?");
+                confirmar.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+                confirmar.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                confirmar.show();
             }
         });
     }

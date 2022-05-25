@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Numero de Boleto">
+            android:hint="Numero de Boleto"
+            android:inputType="number">
         </EditText>
 
         <EditText
@@ -42,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Edad">
+            android:hint="Edad"
+            android:inputType="number">
         </EditText>
 
 
@@ -51,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Fecha: ">
+            android:hint="Fecha: "
+            android:inputType="date">
         </EditText>
 
         <TextView
@@ -89,7 +92,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="Precio">
+            android:hint="Precio"
+            android:inputType="number">
         </EditText>
 
         <!-- Aqui incian los botones-->
@@ -106,6 +110,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Limpiar">
+        </Button>
+
+        <Button
+            android:id="@+id/btnCerrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar">
         </Button>
 
         <!-- Aqui incia la parte para hacer los lbl de mostrar-->

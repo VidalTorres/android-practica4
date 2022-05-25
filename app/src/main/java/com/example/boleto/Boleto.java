@@ -1,7 +1,5 @@
 package com.example.boleto;
 
-import java.util.Scanner;
-
 public class Boleto {
     //variables
     private int numeroBoleto;
@@ -11,9 +9,7 @@ public class Boleto {
     private String fecha;
     private double precio;
 
-    private double impuesto;
     private double descuento;
-    private double subtotal;
     private double total;
 
     //Constructores
@@ -130,6 +126,7 @@ public class Boleto {
 
     //Funciones
     public double obtenerSubtotal(){
+        double subtotal = 0.0;
         if(this.tipoBoleto==1) subtotal = this.precio;
         if(this.tipoBoleto==2) subtotal = this.precio*1.8;
         return subtotal;
@@ -137,19 +134,17 @@ public class Boleto {
 
     public double obtenerDescuento(int edad){
         if (edad > 60){
-            descuento = subtotal/2; //Entre 2 porque es el 50% de descuento
+            descuento = obtenerSubtotal()/2; //Entre 2 porque es el 50% de descuento
         }
         return descuento;
     }
 
     public double obtenerImpuesto(){
-        impuesto = subtotal * .16; //Obtener especificamente el monto de impuesto
-        subtotal = subtotal + impuesto; //agreagarle el impuesto al subotal
-        return impuesto;
+        return obtenerSubtotal() * .16;
     }
 
     public double obtenerTotal(){
-        total = subtotal - descuento;
+        total = obtenerSubtotal() + obtenerImpuesto() - descuento;
         return total;
     }
 
