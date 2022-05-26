@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                     impuesto = boleto.obtenerImpuesto();
 
-                    total = boleto.obtenerTotal();
+                    total = boleto.obtenerTotal(Integer.parseInt(edad));
 
                     //Mostrar datos
                     lblNumeroBoleto2.setText("# " + boleto.getNumeroBoleto());

@@ -7,7 +7,6 @@ public class Boleto {
     private String destino;
     private int tipoBoleto;
     private String fecha;
-    private double descuento;
     private double precio;
 
     //Constructores
@@ -131,6 +130,7 @@ public class Boleto {
     }
 
     public double obtenerDescuento(int edad){
+        double descuento = 0.0;
         if (edad > 60){
             descuento = obtenerSubtotal()/2; //Entre 2 porque es el 50% de descuento
         }
@@ -141,9 +141,9 @@ public class Boleto {
         return obtenerSubtotal() * .16;
     }
 
-    public double obtenerTotal(){
+    public double obtenerTotal(int edad){
         double total;
-        total = obtenerSubtotal() + obtenerImpuesto() - descuento;
+        total = obtenerSubtotal() + obtenerImpuesto() - obtenerDescuento(edad);
         return total;
     }
 
